@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="vender/reset.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../turnBox.js"></script>
+  <style>
+
+    body {
+      background-color: #3a3a3a;
+      padding-top: 100px;
+      color: white;
+      font-size: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    h2 {
+      display: block;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    .example {
+      color: #fff;
+      margin: 0px auto;
+      text-align: center;
+    }
+
+    .turnBoxFace {
+      box-sizing: border-box;
+    }
+
+    p {
+      line-height: 4.2;
+      cursor: pointer;
+    }
+
+    .example.turnBoxCurrentFace2 {
+      margin-top: 42px;
+    }
+
+    .uploading-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #db1716;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1, .example.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #ed4100;
+    }
+
+    .example.turnBoxCurrentFace3 > .turnBoxFaceNum3 {
+      background-color: #83d912;
+    }
+
+    > .turnBoxFaceNum1, > .turnBoxFaceNum2 {
+      background-color: #ba3300;
+    }
+
+    > .turnBoxFaceNum3 {
+      background-color: #67aa0e;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>UPLOADER</h2>
+  <div class="example">
+    <div>
+      <p class="turnBoxButton">
+        UPLOAD
+      </p>
+    </div>
+    <div>
+      <div class="uploading-bar"></div>
+    </div>  
+    <div>
+      <p>
+        COMPLETE
+      </p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    var width = 340;
+    var box = $(".example");
+    var duration = 450;
+
+    box.turnBox(
+    {
+      width: width,
+      height: 87,
+      even: 5,
+      duration: duration,
+      perspective: "400px 20",
+      type: "repeat",
+      direction: "negative",
+      easing: "ease-in-out"
+    });
+
+    var bar = $(".example .turnBoxFaceNum2");
+    var loading = 0;
+    var time = 1000 / 600;
+    var bar_width;
+
+    function loading_bar()
+    {
+      if(loading > bar_width * 0.65) {
+        time = time * 1.1;
+      }
+
+      if(loading > bar_width * 0.75) {
+        time = 1;
+        loading = loading + 2;
+      } else {
+        loading = loading + 1;
+      }
+
+      timer = setTimeout(function()
+      {
+        bar.children("div").css("width", loading + "px");
+        loading_bar();
+      }, time);
+
+      if(loading >= bar_width) {
+        
+        clearTimeout(timer);
+
+        box.turnBoxAnimate(
+        {
+          face: 3
+        });
+
+        setTimeout(function()
+        {
+          loading = 0;
+          bar.children("div").css("width", "0px");
+          time = 1000 / 600;
+        }, duration);
+      }
+    }
+
+    $(".example .turnBoxFaceNum1").on("click", function()
+    {
+      setTimeout(function()
+      {
+        bar_width = bar.innerWidth();
+        loading_bar();
+      }, duration + 1000);
+    });
+    $(".example .turnBoxFaceNum3").on("click", function()
+    {
+      box.turnBoxAnimate();
+    });
+
+  </script>
+
+</body>
+</html>

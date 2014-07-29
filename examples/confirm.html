@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="vender/reset.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../turnBox.js"></script>
+  <style>
+
+    body {
+      background-color: #3a3a3a;
+      padding-top: 100px;
+      color: white;
+      font-size: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    h2 {
+      display: block;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    .example {
+      margin: 0px auto;
+      line-height: 4.2;
+    }
+    
+    .turnBoxButton {
+      display: block;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .turnBoxFaceNum1 {
+      background-color: #101010;
+    }
+
+    .turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+      background-color: #2a2a2a;
+    }
+
+    .turnBoxCurrentFace1 > .turnBoxFaceNum1:hover {
+      background-color: #222;
+    }
+
+    .turnBoxFaceNum2 {
+      background-color: #fafafa;
+      font-size: 0px;
+    }
+
+    .turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #fff;
+    }
+  
+    .turnBoxFaceNum2 .turnBoxButton {
+      display: inline-block;
+      width: 50%;
+      height: 100%;
+      color: #00adea;
+      font-size: 20px;
+      line-height: 4.2;
+      box-sizing: border-box;
+    }
+
+    .turnBoxFaceNum2 .turnBoxButton:hover {
+      background-color: #fafafa;
+    }
+
+    .turnBoxFaceNum2 .turnBoxButtonPrev {
+      color: #ea0070;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .turnBoxFaceNum3 {
+      background-color: #0087b7;
+    }
+
+    .turnBoxCurrentFace3 > .turnBoxFaceNum3 {
+      background-color: #00adea;
+    }
+
+    .turnBoxCurrentFace3 > .turnBoxFaceNum3:hover {
+      background-color: #00a2db;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <h2>CONFIRM</h2>
+  <div class="example wizard">
+    <div>
+      <p class="turnBoxButton">OFF</p>
+    </div>
+    <div>
+      <span class="turnBoxButton turnBoxButtonPrev">CANCEL</span>
+      <span class="turnBoxButton">OK</span>
+    </div>
+    <div>
+      <p class="turnBoxButton turnBoxButtonPrev">ON</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    $(".example").turnBox({
+      width: 340,
+      height: 87
+    });
+
+  </script>
+
+</body>
+</html>

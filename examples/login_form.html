@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="vender/reset.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../turnBox.js"></script>
+  <style>
+
+    body {
+      background-color: #3a3a3a;
+      padding-top: 100px;
+      color: white;
+      font-size: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    h2 {
+      display: block;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    input {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+      background-color: #fff;
+    }
+
+    .example {
+      color: #fff;
+      margin: 0px auto;
+      text-align: center;
+    }
+
+    p {
+      line-height: 4.2;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1, .example.turnBoxCurrentFace3 > .turnBoxFaceNum3 {
+      background-color: #db0069;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1:hover, .example.turnBoxCurrentFace3 > .turnBoxFaceNum3:hover {
+      background-color: #cb0061;
+    }
+
+    .example > .turnBoxFaceNum1, .example > .turnBoxFaceNum3 {
+      background-color: #8e0044;
+    }
+
+    .example.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #ea0070;
+    }
+
+    .example > .turnBoxFaceNum1 p, .example > .turnBoxFaceNum3 p {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .example > .turnBoxFaceNum2 {
+      background-color: #9e004b;
+    }
+
+    .user-information {
+      padding-top: 35px;
+    }
+
+    .user-information > li > * {
+      display: inline-block;
+    }
+
+    .user-information > li > span {
+      width: 13%;
+      text-align: right;
+      font-size: 14px;
+      margin-right: 17px;
+    }
+
+    .user-information > li > input {
+      width: 62%;
+      padding: 7px 10px;
+    }
+
+    .user-information > li:first-child {
+      margin-bottom: 10px;
+    }
+
+    .help {
+      float: left;
+      text-align: right;
+      padding-left: 20px;
+      padding-top: 55px;
+      font-size: 0;
+    }
+
+    .help > div {
+      display: inline-block;
+      font-size: 13px;
+    }
+
+    .help > div:last-child {
+      margin-bottom: 0;
+    }
+
+    .help > div.turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+      background-color: #ea0070;
+    }
+
+    .help > div.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #d80546;
+    }
+
+    .help > div > .turnBoxFaceNum1 {
+      background-color: #b70058;
+    }
+
+    .help > div > .turnBoxFaceNum2 {
+      background-color: #9e004b;
+    }
+
+    .help p {
+      line-height: 2;
+      padding-right: 10px;
+    }
+
+    .login-contents {
+      float: right;
+      margin: 15px 0px;
+      margin-right: 20px;
+      text-align: right;
+    }
+
+    .remember {
+      display: inline-block;
+      padding-right: 20px;
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .remember img {
+      width: 11px;
+      margin-right: 5px;
+    }
+
+    .remember.turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+      background-color: #ea0070;
+    }
+
+    .remember.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #d80546;
+    }
+
+    .remember > .turnBoxFaceNum1 {
+      background-color: #b70058;
+    }
+
+    .remember > .turnBoxFaceNum2 {
+      background-color: #9e004b;
+    }
+
+    .remember p {
+      line-height: 2.5;
+      padding-right: 10px;
+    }
+
+    .check {
+      text-align: center;
+    }
+
+    .check.turnBoxCurrentFace1 > .turnBoxFaceNum1, .check.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #d80546;
+    }
+
+    .check > .turnBoxFaceNum1, .check > .turnBoxFaceNum2 {
+      background-color: #a60436;
+    }
+
+    .check p {
+      line-height: 2.5;
+      cursor: pointer
+    }
+
+    .login-sns {
+      position: absolute;
+      width: 100%;
+      font-size: 0;
+      bottom: 0;
+      background-color: #d80546;
+      padding: 10px 0px;
+    }
+
+    .login-sns a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      margin-right: 20px;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .login-sns a:last-child {
+      margin-right: 0;
+    }
+
+    .login-sns img {
+      display: none;
+      padding-top: 13px;
+      width: 25px;
+      height: 25px;
+      opacity: 0.5;
+    }
+
+    .login-sns img.show {
+      display: inline;
+    }
+
+    .login-sns .loading {
+      padding-top: 10px;
+      width: 30px;
+      height: 30px;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <h2>LOGIN FORM</h2>
+  <div class="example login-form">
+    <div>
+      <p class="turnBoxButton">
+        LOGIN
+      </p>
+    </div>
+    <div>
+      <ul class="user-information">
+        <li>
+          <span>ID</span><input type="text">
+        </li>
+        <li>
+          <span>PASS</span><input type="text">
+        </li>
+      </ul>
+      <div class="help">
+        <div class="forgot-pass">
+          <div>
+            <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">Forgot password?</p>
+          </div>
+          <div>
+            <p class="turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">Forgot password?</p>
+          </div>
+        </div>
+        <br/>
+        <div class="sign-up">
+          <div>
+            <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">Sign up?</p>
+          </div>
+          <div>
+            <p class="turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">Sign up?</p>
+          </div>
+        </div>
+      </div>
+      <div class="login-contents">
+        <div class="remember">
+          <div>
+            <p class="turnBoxButton">
+              Remember Me
+            </p>
+          </div>
+          <div>
+            <p class="turnBoxButton turnBoxButtonPrev">
+              <img src="/images/turnbox/icon_check.png" alt="">Remember Me
+            </p>
+          </div>
+        </div>
+        <span class="check">
+          <div>
+            <p class="ok turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">
+              GO
+            </p>
+          </div>
+          <div>
+            <p class="go turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">
+              GO
+            </p>
+          </div>
+        </span>
+      </div>
+      <div class="login-sns">
+        <a>
+          <img class="icon" src="images/icon_sns_googleplus.png" alt="">
+          <img class="loading" src="images/icon_loading.gif" alt="">
+        </a>
+        <a>
+          <img class="icon" src="images/icon_sns_twitter.png" alt="">
+          <img class="loading" src="images/icon_loading.gif" alt="">
+        </a>
+        <a>
+          <img class="icon" src="images/icon_sns_facebook.png" alt="">
+          <img class="loading" src="images/icon_loading.gif" alt="">
+        </a>
+        <a>
+          <img class="icon" src="images/icon_github.png" alt="">
+          <img class="loading" src="images/icon_loading.gif" alt="">
+        </a>
+      </div>
+    </div>
+    <div>
+      <p class="turnBoxButton turnBoxButtonPrev">THANKS</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    var width = 340;
+    var duration = 450;
+    var general_box = $(".example");
+    var confirm_box = general_box.find(".check");
+    var remember_box = general_box.find(".remember");
+    var forgotpass_box = general_box.find(".forgot-pass");
+    var signup_box = general_box.find(".sign-up");
+
+    general_box.turnBox({
+      width: width,
+      height: 87,
+      even: 320,
+      perspective: 3000,
+      duration: duration,
+      easing: "ease-in-out",
+      type: "repeat"
+    });
+
+     confirm_box.turnBox({
+      width: parseInt(width * 0.4),
+      height: 50,
+      perspective: 3000,
+      duration: 300,
+      easing: "ease-in-out"
+    });
+
+     remember_box.turnBox({
+      width: parseInt(width * 0.35),
+      height: 30,
+      perspective: 3000,
+      duration: 300,
+      easing: "ease-in-out"
+    });
+
+     forgotpass_box.turnBox({
+      width: parseInt(width * 0.4),
+      height: 23,
+      perspective: 3000,
+      duration: 300,
+      easing: "ease-in-out"
+    });
+
+     signup_box.turnBox({
+      width: parseInt(width * 0.23),
+      height: 23,
+      perspective: 3000,
+      duration: 300,
+      easing: "ease-in-out"
+    });
+
+    $(".login-sns .icon").addClass("show");
+    $(".login-sns a").on("click", function()
+    {
+      $(this).children().removeClass("show");
+      $(this).children(".loading").addClass("show");
+      setTimeout(function()
+      {
+        general_box.turnBoxAnimate(
+        {
+          face: 3
+        });
+        setTimeout(function()
+        {
+          $(".login-sns a").children().removeClass("show");
+          $(".login-sns a").children(".icon").addClass("show");
+        }, duration);
+      }, 1000);
+    });
+
+
+    confirm_box.find(".go").turnBoxLink({
+      box: ".example",
+      events: "click touchend"
+    });
+
+    confirm_box.find(".go").on("click touchend", function()
+    {
+      setTimeout(function()
+      {
+        confirm_box.turnBoxAnimate({
+          animation: false
+        });
+        remember_box.turnBoxAnimate({
+          animation: false
+        });
+        forgotpass_box.turnBoxAnimate({
+          animation: false
+        });
+        signup_box.turnBoxAnimate({
+          animation: false
+        });
+        general_box.find("input").val("").attr("checked", false);
+
+      }, duration);
+    });
+
+  </script>
+
+</body>
+</html>

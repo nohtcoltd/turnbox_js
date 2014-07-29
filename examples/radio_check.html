@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="vender/reset.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../turnBox.js"></script>
+  <style>
+
+    body {
+      background-color: #3a3a3a;
+      padding-top: 100px;
+      color: white;
+      font-size: 0px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+    }
+    
+    h2 {
+      display: block;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    .contents {
+      display: inline-block;
+    }
+
+    .radio-wrapper, .check-wrapper {
+      float: left;
+      margin: 0px 20px;
+    }
+    
+    .example {
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 8px;
+    }  
+
+    .example p {
+      -webkit-transition: all 100ms ease-in-out 0ms;
+      -moz-transition: all 100ms ease-in-out 0ms;
+      -ms-transition: all 100ms ease-in-out 0ms;
+      -o-transition: all 100ms ease-in-out 0ms;
+      transition: all 100ms ease-in-out 0ms;
+      line-height: 3.5;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .example p:hover {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+      background-color: #333;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum2 {
+      background-color: #0093b1;
+    }
+
+    .example .turnBoxFaceNum1 {
+      background-color: #262626;
+    }
+
+    .example .turnBoxFaceNum2 {
+      background-color: #007e98;
+    }
+
+    .example .turnBoxFaceNum2 p {
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="contents">
+    <div class="radio-wrapper">
+      <h2>RADIO</h2>
+      <div class="example radio">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p>ON</p>
+        </div>
+      </div>
+      <div class="example radio">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p>ON</p>
+        </div>
+      </div>
+      <div class="example radio">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p>ON</p>
+        </div>
+      </div>
+      <div class="example radio">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p>ON</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-wrapper">
+      <h2>CHECK</h2>
+      <div class="example check">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p class="turnBoxButton turnBoxButtonPrev">ON</p>
+        </div>
+      </div>
+      <div class="example check">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p class="turnBoxButton turnBoxButtonPrev">ON</p>
+        </div>
+      </div>
+      <div class="example check">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p class="turnBoxButton turnBoxButtonPrev">ON</p>
+        </div>
+      </div>
+      <div class="example check">
+        <div>
+          <p class="turnBoxButton">OFF</p>
+        </div>
+        <div>
+          <p class="turnBoxButton turnBoxButtonPrev">ON</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    var duration = 200;
+    var radio = $(".example.radio");
+    var check_box = $(".example.check");
+
+    radio.turnBox(
+    {
+      duration: duration
+    });
+
+    $.each(radio.parent().children(".radio"), function(key)
+    {
+      var self = this;
+      $(radio).find(".turnBoxButton").on("click", function()
+      {
+        radio.parent().children(".radio").not(self).turnBoxAnimate();
+      });
+    });
+
+    $(radio.parent().children(".radio")[0]).turnBoxAnimate(
+    {
+      face: 2,
+      animation: false
+    });
+
+    check_box.turnBox(
+    {
+      duration: duration
+    });
+
+    menu.turnBox(
+    {
+      duration: duration
+    });
+
+  </script>
+
+</body>
+</html>

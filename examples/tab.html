@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="vender/reset.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../turnBox.js"></script>
+  <style>
+
+    body {
+      background-color: #3a3a3a;
+      padding-top: 100px;
+      color: white;
+      font-size: 0px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+    }
+    
+    h2 {
+      display: block;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    .tabs {
+      display: inline-block;
+    }
+
+    .tab {
+      font-size: 20px;
+      color: #fff;
+      float: left;
+      margin-right: 4px;
+    }
+
+    .tab:last-child {
+      margin-right: 0;
+    }
+
+    .tab p {
+      line-height: 3;
+      cursor: pointer;
+    }
+    
+    .tab.turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+      background-color: #3f3f3f;
+    }
+
+    .tab.turnBoxCurrentFace1 > .turnBoxFaceNum1:hover {
+      background-color: #373737;
+    }
+
+    .tab.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #0094ef;
+    }
+
+    .tab .turnBoxFaceNum1 {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .tab .turnBoxFaceNum2 {
+      background-color: rgba(0, 148, 239, 0.1);
+    }
+
+    .content-box {
+      font-size: 20px;
+      color: #3f3f3f;
+      margin: 0px auto;
+      line-height: 7.7;
+    } 
+
+    .content-box.turnBoxCurrentFace1 > .turnBoxFaceNum1, .content-box.turnBoxCurrentFace2 > .turnBoxFaceNum2, .content-box.turnBoxCurrentFace3 > .turnBoxFaceNum3 {
+      background-color: #e2e2e2;
+    }
+    .content-box .turnBoxFace {
+      background-color: #afafaf;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="tabs">
+    <h2>TAB</h2>
+    <div class="tab tab-1">
+      <div>
+        <p class="turnBoxButton turnBoxNext">TAB1</p>
+      </div>
+      <div>
+        <p>TAB1</p>
+      </div>
+    </div>
+    <div class="tab tab-2">
+      <div>
+        <p class="turnBoxButton turnBoxNext">TAB2</p>
+      </div>
+      <div>
+        <p>TAB2</p>
+      </div>
+    </div>
+    <div class="tab tab-3">
+      <div>
+        <p class="turnBoxButton turnBoxNext">TAB3</p>
+      </div>
+      <div>
+        <p>TAB3</p>
+      </div>
+    </div>
+  </div>
+  <div class="content-box">
+    <div>CONTENT 1</div>
+    <div>CONTENT 2</div>
+    <div>CONTENT 3</div>
+  </div>
+
+  <script type="text/javascript">
+
+    var tab_width = 264;
+    var content_width = 800;
+    var duration = 350;
+    var tab_box_class = $(".tab");
+    var content_box_class = $(".content-box");
+
+    tab_box_class.turnBox({
+      width: tab_width,
+      height: 60,
+      perspective: 300,
+      duration: duration,
+      easing: "ease-in-out"
+    });
+
+    content_box_class.turnBox({
+      width: content_width,
+      height: 150,
+      perspective: 1300,
+      duration: duration,
+      easing: "ease-in-out",
+      type: "skip",
+      axis: "y"
+    });
+
+    for(i = 0; i < tab_box_class.length; i++) {
+      var num = i + 1;
+      $(".tab.tab-" + num).turnBoxLink(
+      {
+        box: ".content-box",
+        dist: num,
+        events: "click"
+      });
+    };
+
+    $.each($(".tabs").children(), function(key)
+    {
+      var tab = key + 1;
+
+      $(".tab.tab-" + tab).find(".turnBoxButton").on("click", function()
+      {
+        $(".tab").not(".tab-" + tab).turnBoxAnimate();
+      });
+    });
+
+    $(".tab.tab-1").turnBoxAnimate(
+    {
+      face: 2,
+      animation: false
+    });
+
+  </script>
+
+</body>
+</html>

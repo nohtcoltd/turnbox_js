@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="vender/reset.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../turnBox.js"></script>
+  <style>
+
+    body {
+      background-color: #3a3a3a;
+      padding-top: 100px;
+      color: white;
+      font-size: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    h2 {
+      display: block;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    input {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+      background-color: #fff;
+    }
+
+    .example {
+      color: #fff;
+      margin: 0px auto;
+      text-align: center;
+    }
+
+    p {
+      line-height: 4.2;
+      -webkit-background-clip: content-box;
+      -moz-background-clip: content-box;
+      background-clip: content-box;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1, .example.turnBoxCurrentFace3 > .turnBoxFaceNum3 {
+      background-color: #d6bc00;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1:hover, .example.turnBoxCurrentFace3 > .turnBoxFaceNum3:hover {
+      background-color: #c6ae00;
+    }
+
+    .example > .turnBoxFaceNum1, .example > .turnBoxFaceNum3 {
+      background-color: #897800;
+    }
+
+    .example.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #e5c900;
+    }
+
+    .example > .turnBoxFaceNum1 p, .example > .turnBoxFaceNum3 p {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .example > .turnBoxFaceNum2 {
+      background-color: #998600;
+    }
+
+    .example > .turnBoxFace {
+      box-sizing: border-box;
+    }
+
+    .example > .turnBoxFaceNum1 {
+      background-color: darken($bg-color1, 15%);
+    }
+
+    .example > .turnBoxFaceNum2 {
+      background-color: darken($bg-color2, 15%);
+    }
+
+    img {
+      margin-top: 30px;
+      width: 52px;
+      height: 52px;
+    }
+
+    .message {
+      line-height: 1.8;
+      text-align: left;
+      padding: 0px 40px;
+      padding-top: 20px;
+      font-size: 16px;
+      word-break: break-all;
+    }
+
+    .example .check {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .check.turnBoxCurrentFace1 > .turnBoxFaceNum1, .check.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+      background-color: #ea5f00;
+    }
+
+    .check > .turnBoxFaceNum1, .check > .turnBoxFaceNum2 {
+      background-color: #b74a00;
+    }
+
+    .check p {
+      line-height: 3.8;
+      font-size: 20px;
+      cursor: pointer
+    }
+
+  </style>
+</head>
+<body>
+  
+  <h2>NOTIFY</h2>
+  <div class="example notify">
+    <div>
+      <p class="turnBoxButton">
+        NOTIFY
+      </p>
+    </div>
+    <div>
+      <img src="images/icon_information.png" alt="information">
+      <p class="message">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <span class="check">
+        <div>
+          <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">
+            OK
+          </p>
+        </div>
+        <div>
+          <p class="ok turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend turnBoxButtonEventTouchmove">
+            OK
+          </p>
+        </div>
+      </span>
+    </div>
+    <div>
+      <p class="turnBoxButton turnBoxButtonPrev">THANKS</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    var width = 340;
+    var duration = 450;
+    var general_box = $(".example");
+    var confirm_box = $(".check");
+
+    general_box.turnBox({
+      width: width,
+      height: 87,
+      even: 320,
+      perspective: 3000,
+      duration: duration,
+      easing: "ease-in-out",
+      type: "repeat"
+    });
+
+    confirm_box.turnBox({
+      width: width,
+      height: 75,
+      perspective: 3000,
+      duration: 200,
+      easing: "ease-in-out"
+    });
+    
+    general_box.find(".ok").turnBoxLink({
+      box: ".notify",
+      events: "click touchend"
+    });
+
+    general_box.find(".ok").on("click touchend", function()
+    {
+      setTimeout(function()
+      {
+        confirm_box.turnBoxAnimate({
+          animation: false
+        });
+      }, duration);
+    });
+
+  </script>
+
+</body>
+</html>
