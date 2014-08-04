@@ -104,33 +104,21 @@
     }
 
     .help > div {
+      -webkit-transition: all 100ms ease-in-out 0ms;
+      -moz-transition: all 100ms ease-in-out 0ms;
+      -ms-transition: all 100ms ease-in-out 0ms;
+      -o-transition: all 100ms ease-in-out 0ms;
+      transition: all 100ms ease-in-out 0ms;
       display: inline-block;
-      font-size: 13px;
+      padding: 2px 10px;
+      font-size: 12px;
+      margin-bottom: 5px;
+      background-color: transparent;
+      cursor: pointer;
     }
 
-    .help > div:last-child {
-      margin-bottom: 0;
-    }
-
-    .help > div.turnBoxCurrentFace1 > .turnBoxFaceNum1 {
-      background-color: #ea0070;
-    }
-
-    .help > div.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+    .help > div:hover {
       background-color: #d80546;
-    }
-
-    .help > div > .turnBoxFaceNum1 {
-      background-color: #b70058;
-    }
-
-    .help > div > .turnBoxFaceNum2 {
-      background-color: #9e004b;
-    }
-
-    .help p {
-      line-height: 2;
-      padding-right: 10px;
     }
 
     .login-contents {
@@ -172,22 +160,24 @@
       line-height: 2.5;
       padding-right: 10px;
     }
-
+ 
     .check {
+      -webkit-transition: all 100ms ease-in-out 0ms;
+      -moz-transition: all 100ms ease-in-out 0ms;
+      -ms-transition: all 100ms ease-in-out 0ms;
+      -o-transition: all 100ms ease-in-out 0ms;
+      transition: all 100ms ease-in-out 0ms;
+      width: 136px;
+      height: 50px;
+      display: block;
       text-align: center;
-    }
-
-    .check.turnBoxCurrentFace1 > .turnBoxFaceNum1, .check.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
-      background-color: #d80546;
-    }
-
-    .check > .turnBoxFaceNum1, .check > .turnBoxFaceNum2 {
-      background-color: #a60436;
-    }
-
-    .check p {
       line-height: 2.5;
-      cursor: pointer
+      background-color: #d80546;
+      cursor: pointer;
+    }
+
+    .check:hover {
+      background-color: #bf043e;
     }
 
     .login-sns {
@@ -236,7 +226,7 @@
 <body>
   
   <h2>LOGIN FORM</h2>
-  <div class="example login-form">
+  <div class="example">
     <div>
       <p class="turnBoxButton">
         LOGIN
@@ -253,21 +243,11 @@
       </ul>
       <div class="help">
         <div class="forgot-pass">
-          <div>
-            <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">Forgot password?</p>
-          </div>
-          <div>
-            <p class="turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">Forgot password?</p>
-          </div>
+          Forgot password?
         </div>
         <br/>
         <div class="sign-up">
-          <div>
-            <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">Sign up?</p>
-          </div>
-          <div>
-            <p class="turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">Sign up?</p>
-          </div>
+          Sign up?
         </div>
       </div>
       <div class="login-contents">
@@ -279,21 +259,12 @@
           </div>
           <div>
             <p class="turnBoxButton turnBoxButtonPrev">
-              <img src="/images/turnbox/icon_check.png" alt="">Remember Me
+              <img src="images/icon_check.png" alt="">Remember Me
             </p>
           </div>
         </div>
         <span class="check">
-          <div>
-            <p class="ok turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">
-              GO
-            </p>
-          </div>
-          <div>
-            <p class="go turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">
-              GO
-            </p>
-          </div>
+          GO
         </span>
       </div>
       <div class="login-sns">
@@ -316,7 +287,7 @@
       </div>
     </div>
     <div>
-      <p class="turnBoxButton turnBoxButtonPrev">THANKS</p>
+      <p class="turnBoxButton turnBoxButtonPrev">LOGIN SUCCEEDED</p>
     </div>
   </div>
 
@@ -325,10 +296,7 @@
     var width = 340;
     var duration = 450;
     var general_box = $(".example");
-    var confirm_box = general_box.find(".check");
     var remember_box = general_box.find(".remember");
-    var forgotpass_box = general_box.find(".forgot-pass");
-    var signup_box = general_box.find(".sign-up");
 
     general_box.turnBox({
       width: width,
@@ -340,33 +308,9 @@
       type: "repeat"
     });
 
-     confirm_box.turnBox({
-      width: parseInt(width * 0.4),
-      height: 50,
-      perspective: 3000,
-      duration: 300,
-      easing: "ease-in-out"
-    });
-
      remember_box.turnBox({
       width: parseInt(width * 0.35),
       height: 30,
-      perspective: 3000,
-      duration: 300,
-      easing: "ease-in-out"
-    });
-
-     forgotpass_box.turnBox({
-      width: parseInt(width * 0.4),
-      height: 23,
-      perspective: 3000,
-      duration: 300,
-      easing: "ease-in-out"
-    });
-
-     signup_box.turnBox({
-      width: parseInt(width * 0.23),
-      height: 23,
       perspective: 3000,
       duration: 300,
       easing: "ease-in-out"
@@ -392,25 +336,16 @@
     });
 
 
-    confirm_box.find(".go").turnBoxLink({
+    general_box.find(".check").turnBoxLink({
       box: ".example",
       events: "click touchend"
     });
 
-    confirm_box.find(".go").on("click touchend", function()
+    general_box.find(".check").on("click touchend", function()
     {
       setTimeout(function()
       {
-        confirm_box.turnBoxAnimate({
-          animation: false
-        });
         remember_box.turnBoxAnimate({
-          animation: false
-        });
-        forgotpass_box.turnBoxAnimate({
-          animation: false
-        });
-        signup_box.turnBoxAnimate({
           animation: false
         });
         general_box.find("input").val("").attr("checked", false);

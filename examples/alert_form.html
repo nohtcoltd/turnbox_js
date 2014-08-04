@@ -101,41 +101,31 @@
     }
 
     .ok, .cancel {
-      margin: 0px auto;
-    }
-
-    .ok p, .cancel p {
-      font-size: 20px;
-      cursor: pointer;
-      line-height: 2.5;
-    }
-
-    .ok {
-      margin-top: 35px;
-    }
-
-    .ok.turnBoxCurrentFace1 > .turnBoxFaceNum1, .ok.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
-      background-color: #0583e0;
-    }
-
-    .ok > .turnBoxFace {
-      background-color: #0466ae;
-    }
-
-    .cancel {
       -webkit-transition: all 100ms ease-in-out 0ms;
       -moz-transition: all 100ms ease-in-out 0ms;
       -ms-transition: all 100ms ease-in-out 0ms;
       -o-transition: all 100ms ease-in-out 0ms;
       transition: all 100ms ease-in-out 0ms;
-      $bg-color: #23446a;
+      margin: 0px auto;
       display: block;
       margin-top: 10px;
       width: 306px;
       height: 50px;
       line-height: 2.5;
-      background-color: #23446a;
       cursor: pointer;
+    }
+
+    .ok {
+      margin-top: 35px;
+      background-color: #0583e0;
+    }
+
+    .ok:hover {
+      background-color: #0474c7;
+    }
+
+    .cancel {
+      background-color: #23446a;
     }
 
     .cancel:hover {
@@ -147,7 +137,7 @@
 <body>
   
   <h2>ALERT</h2>
-  <div class="example alert-dialog">
+  <div class="example">
     <div>
       <p class="turnBoxButton">
         ALERT
@@ -158,22 +148,11 @@
       <p class="message">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
-      <span class="ok">
-        <div>
-          <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">
-            OK
-          </p>
-        </div>
-        <div>
-          <p class="parent-action turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend">
-            OK
-          </p>
-        </div>
-      </span>
+      <span class="ok">OK</span>
       <span class="cancel">CANCEL</span>
     </div>
     <div>
-      <p class="turnBoxButton turnBoxButtonPrev">THANKS</p>
+      <p class="turnBoxButton turnBoxButtonPrev">CONFIRMED</p>
     </div>
   </div>
 
@@ -182,7 +161,6 @@
     var width = 340;
     var duration = 450;
     var general_box = $(".example");
-    var agree_box_class = general_box.find(".ok");
 
     general_box.turnBox({
       width: width,
@@ -194,33 +172,15 @@
       type: "repeat"
     });
 
-     agree_box_class.turnBox({
-      width: width * 0.9,
-      height: 50,
-      perspective: 3000,
-      duration: 300,
-      easing: "ease-in-out"
-    });
-
-    agree_box_class.find(".parent-action").turnBoxLink({
-      box: ".alert-dialog",
+    general_box.find(".ok").turnBoxLink({
+      box: ".example",
       events: "click touchend"
     });
 
     general_box.find(".cancel").turnBoxLink(
     {
-      box: ".alert-dialog",
+      box: ".example",
       dist: "prev"
-    });
-
-    $(".parent-action").on("click touchend", function()
-    {
-      setTimeout(function()
-      {
-        agree_box_class.turnBoxAnimate({
-          animation: false
-        });
-      }, duration);
     });
 
   </script>

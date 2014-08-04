@@ -102,22 +102,23 @@
     }
 
     .example .check {
+      -webkit-transition: all 100ms ease-in-out 0ms;
+      -moz-transition: all 100ms ease-in-out 0ms;
+      -ms-transition: all 100ms ease-in-out 0ms;
+      -o-transition: all 100ms ease-in-out 0ms;
+      transition: all 100ms ease-in-out 0ms;
       position: absolute;
+      width: 100%;
+      height: 75px;
+      left: 0;
       bottom: 0;
-    }
-
-    .check.turnBoxCurrentFace1 > .turnBoxFaceNum1, .check.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
-      background-color: #ea5f00;
-    }
-
-    .check > .turnBoxFaceNum1, .check > .turnBoxFaceNum2 {
-      background-color: #b74a00;
-    }
-
-    .check p {
       line-height: 3.8;
-      font-size: 20px;
-      cursor: pointer
+      background-color: #ea5f00;
+      cursor: pointer;
+    }
+
+    .example .check {
+      background-color: #d15500;
     }
 
   </style>
@@ -125,7 +126,7 @@
 <body>
   
   <h2>NOTIFY</h2>
-  <div class="example notify">
+  <div class="example">
     <div>
       <p class="turnBoxButton">
         NOTIFY
@@ -137,20 +138,11 @@
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
       <span class="check">
-        <div>
-          <p class="turnBoxButton turnBoxButtonEventMouseover turnBoxButtonEventTouchstart">
-            OK
-          </p>
-        </div>
-        <div>
-          <p class="ok turnBoxButton turnBoxButtonPrev turnBoxButtonEventMouseout turnBoxButtonEventTouchend turnBoxButtonEventTouchmove">
-            OK
-          </p>
-        </div>
+        OK
       </span>
     </div>
     <div>
-      <p class="turnBoxButton turnBoxButtonPrev">THANKS</p>
+      <p class="turnBoxButton turnBoxButtonPrev">CONFIRMED</p>
     </div>
   </div>
 
@@ -158,8 +150,8 @@
 
     var width = 340;
     var duration = 450;
+    var duration = 450;
     var general_box = $(".example");
-    var confirm_box = $(".check");
 
     general_box.turnBox({
       width: width,
@@ -170,28 +162,10 @@
       easing: "ease-in-out",
       type: "repeat"
     });
-
-    confirm_box.turnBox({
-      width: width,
-      height: 75,
-      perspective: 3000,
-      duration: 200,
-      easing: "ease-in-out"
-    });
     
-    general_box.find(".ok").turnBoxLink({
-      box: ".notify",
+    general_box.find(".check").turnBoxLink({
+      box: ".example",
       events: "click touchend"
-    });
-
-    general_box.find(".ok").on("click touchend", function()
-    {
-      setTimeout(function()
-      {
-        confirm_box.turnBoxAnimate({
-          animation: false
-        });
-      }, duration);
     });
 
   </script>
